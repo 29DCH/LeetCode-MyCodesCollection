@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x<0)
+        return false;
+        int temp[100]={0},i=0;
+        while(x)
+        {
+            temp[i++]=x%10;
+            x/=10;
+        }
+        for(int j=0;j<i/2;j++)
+        {
+            if(temp[j]!=temp[i-j-1])
+                return false;
+        }
+        return true;
+    }
+};
+
+
+
+class Solution:
+    def isPalindrome(self, x):
+        return str(x)==str(x)[::-1]
+
+
+class Solution:
+    def isPalindrome(self, x):
+        return list(str(x))==list(reversed(str(x)))
