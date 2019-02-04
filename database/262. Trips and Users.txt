@@ -1,0 +1,20 @@
+SELECT 
+    request_at AS Day, 
+    round(
+        sum(
+            CASE WHEN
+                status="completed" THEN 0
+                ELSE 1 
+            END )
+            /count(*),  2)     
+        AS "Cancellation Rate"
+FROM Trips t INNER JOIN Users u ON t.Client_Id = u.Users_Id and u.Banned='No'
+WHERE request_at BETWEEN "2013-10-01" AND "2013-10-03"
+GROUP BY request_at
+ORDER BY request_at;
+
+select t.Request_at as Day, Round(Sum(If(t.status = 'completed',0,1)) / Count(*),2) as 'Cancellation Rate'
+from Trips t,Users u where t.Client_Id = u.Users_Id and u.Banned='No' 
+and t.Request_at Between '2013-10-01' and '2013-10-03'
+group by Day
+order by Day;
