@@ -1,0 +1,10 @@
+Update salary 
+SET sex = CASE sex WHEN 'f' THEN 'm' ELSE 'f' END;
+
+update salary set sex=IF(sex='m','f', 'm')
+
+UPDATE salary 
+SET sex = CHAR(ASCII('f') ^ ASCII('m') ^ ASCII(sex))
+
+UPDATE salary
+SET sex = CHAR(ASCII(sex) ^ 11)
