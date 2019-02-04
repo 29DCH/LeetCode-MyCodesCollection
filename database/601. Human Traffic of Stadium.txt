@@ -1,0 +1,43 @@
+select s.id,s.date,s.people from stadium s where people >= 100 and
+(
+    (
+        (select people from stadium where id = s.id + 1) >= 100 
+        and 
+        (select people from stadium where id = s.id - 1) >= 100
+    )
+    or
+    (
+        (select people from stadium where id = s.id - 1) >= 100 
+        and 
+        (select people from stadium where id = s.id - 2) >= 100
+    ) 
+    or
+    (
+        (select people from stadium where id = s.id + 1) >= 100 
+        and 
+        (select people from stadium where id = s.id + 2) >= 100
+    )
+);
+
+
+select * from stadium s where s.people >= 100 and 
+(
+(
+s.id+1 in (select id from stadium where people >= 100) 
+and 
+s.id+2 in (select id from stadium where people >= 100) 
+)
+or 
+(
+s.id-1 in (select id from stadium where people >= 100) 
+and 
+s.id+1 in (select id from stadium where people >= 100) 
+)
+or 
+(
+s.id-1 in (select id from stadium where people >= 100) 
+and 
+s.id-2 in (select id from stadium where people >= 100) 
+)
+);
+ 
